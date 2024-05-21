@@ -1,9 +1,3 @@
-export type UserName = {
-  firstName: string;
-  middleName?: string;
-  lastName: string;
-};
-
 export type Variant = {
   type: string;
   value: string;
@@ -21,7 +15,7 @@ export type Product = {
 
 export type Data = {
   id: string;
-  name: UserName;
+  name: string;
   description: string;
   price: string;
   category: string;
