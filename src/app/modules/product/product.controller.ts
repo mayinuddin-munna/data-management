@@ -4,6 +4,7 @@ import { ProductServices } from './product.service';
 const createProduct = async (req: Request, res: Response) => {
   try {
     const { product: productData } = req.body;
+
     const result = await ProductServices.createDataIntoDB(productData);
 
     res.status(200).json({
@@ -12,7 +13,11 @@ const createProduct = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (err) {
-    console.log(err);
+    res.status(500).json({
+      success: false,
+      message: 'Something went wrong!',
+      error: err,
+    });
   }
 };
 
@@ -26,7 +31,11 @@ const getAllProducts = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (err) {
-    console.log(err);
+    res.status(500).json({
+      success: false,
+      message: 'Something went wrong!',
+      error: err,
+    });
   }
 };
 
@@ -41,7 +50,11 @@ const getSingleProduct = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (err) {
-    console.log(err);
+    res.status(500).json({
+      success: false,
+      message: 'Something went wrong!',
+      error: err,
+    });
   }
 };
 

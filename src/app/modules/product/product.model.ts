@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { Product, Inventory, Data } from './product.interface';
+import { Variant, Inventory, Products } from './product.interface';
 
 const inventorySchema = new Schema<Inventory>({
   quantity: {
@@ -12,18 +12,18 @@ const inventorySchema = new Schema<Inventory>({
   },
 });
 
-const productSchema = new Schema<Product>({
-  variants: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
-  inventory: inventorySchema,
+const variantSchema = new Schema<Variant>({
+  type: {
+    type: String,
+    required: true,
+  },
+  value: {
+    type: String,
+    required: true,
+  },
 });
 
-const dataSchema = new Schema<Data>({
-  id: { type: String },
+const productsSchema = new Schema<Products>({
   name: {
     type: String,
     required: true,
@@ -41,9 +41,14 @@ const dataSchema = new Schema<Data>({
     required: true,
   },
   tags: [{ type: String, required: true }],
-  product: productSchema,
+  variants: [variantSchema],
+  inventory: inventorySchema,
   profileImg: { type: String },
-  isActive: ['active', 'blocked'],
+  isActive: {
+    type: String,
+    enum: ['active', 'blocked'],
+    default: 'active',
+  },
 });
 
-export const DataModel = model<Data>('Data', dataSchema);
+export const DataModel = model<Products>('Products', productsSchema);

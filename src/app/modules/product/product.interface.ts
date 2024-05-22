@@ -8,19 +8,15 @@ export type Inventory = {
   inStock: boolean;
 };
 
-export type Product = {
-  variants: Variant[];
-  inventory: Inventory;
-};
-
-export type Data = {
+export type Products = {
   id: string;
   name: string;
   description: string;
   price: string;
   category: string;
   tags: string[];
-  product: Product[];
+  variants: Variant[];
+  inventory: Inventory;
   profileImg?: string;
   isActive: 'active' | 'blocked';
 };
