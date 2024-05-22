@@ -1,23 +1,23 @@
-import { DataModel } from './product.model';
-import { Data } from './product.interface';
+import { ProductModel } from './product.model';
+import { Products } from './product.interface';
 
-const createDataIntoDB = async (data: Data) => {
-  const result = await DataModel.create(data);
+const createProductIntoDB = async (products: Products) => {
+  const result = await ProductModel.create(products);
   return result;
 };
 
-const getAllDataFromDB = async () => {
-  const result = await DataModel.find();
+const getAllProductsFromDB = async () => {
+  const result = await ProductModel.find();
   return result;
 };
 
-const getSingleDataFromDB = async (id: string) => {
-  const result = await DataModel.findOne({ id });
+const getSingleProductFromDB = async (id: string) => {
+  const result = await ProductModel.findOne({ id });
   return result;
 };
 
 export const ProductServices = {
-  createDataIntoDB,
-  getAllDataFromDB,
-  getSingleDataFromDB,
+  createProductIntoDB,
+  getAllProductsFromDB,
+  getSingleProductFromDB,
 };
