@@ -25,6 +25,55 @@ const createProduct = async (req: Request, res: Response) => {
   }
 };
 
+const updateProduct = async (req: Request, res: Response) => {
+  try {
+    const { productId } = req.params;
+    const updateData = req.body;
+    const result = await ProductServices.updateProductIntoDB(
+      productId,
+      updateData,
+    );
+
+    res.status(200).json({
+      success: true,
+      message: 'Product is update successfully',
+      data: result,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Something went wrong!',
+      error: err,
+    });
+  }
+};
+
+const deleteProduct = async (req: Request, res: Response) => {
+  try {
+    const { productId } = req.params;
+    const result = await ProductServices.deleteProductIntoDB(productId);
+
+    if (!result.deletedCount) {
+      return res.status(400).json({
+        status: 'fail',
+        error: "Couldn't delete the product",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Product is delete successfully',
+      data: result,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Something went wrong!',
+      error: err,
+    });
+  }
+};
+
 const getAllProducts = async (req: Request, res: Response) => {
   try {
     const result = await ProductServices.getAllProductsFromDB();
@@ -64,6 +113,8 @@ const getSingleProduct = async (req: Request, res: Response) => {
 
 export const ProductControllers = {
   createProduct,
+  updateProduct,
+  deleteProduct,
   getAllProducts,
   getSingleProduct,
 };
