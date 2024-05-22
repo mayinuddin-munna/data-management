@@ -11,11 +11,9 @@ export type Inventory = {
 export type Products = {
   name: string;
   description: string;
-  price: string;
+  price: number;
   category: string;
   tags: string[];
   variants: Variant[];
   inventory: Inventory;
-  profileImg?: string;
-  isActive: 'active' | 'blocked';
 };

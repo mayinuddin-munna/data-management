@@ -33,7 +33,7 @@ const productsSchema = new Schema<Products>({
     required: true,
   },
   price: {
-    type: String,
+    type: Number,
     required: true,
   },
   category: {
@@ -43,12 +43,6 @@ const productsSchema = new Schema<Products>({
   tags: [{ type: String, required: true }],
   variants: [variantSchema],
   inventory: inventorySchema,
-  profileImg: { type: String },
-  isActive: {
-    type: String,
-    enum: ['active', 'blocked'],
-    default: 'active',
-  },
 });
 
 export const ProductModel = model<Products>('Products', productsSchema);
