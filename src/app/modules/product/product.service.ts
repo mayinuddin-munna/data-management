@@ -9,7 +9,7 @@ const createProductIntoDB = async (products: Products) => {
 const getAllProductsFromDB = async (searchTerm?: string) => {
   let result;
   if (searchTerm) {
-    result = await ProductModel.find({ searchTerm });
+    result = await ProductModel.find({ name: new RegExp(searchTerm, 'i') });
   } else {
     result = await ProductModel.find();
   }
